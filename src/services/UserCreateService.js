@@ -17,6 +17,12 @@ class UserCreateService {
       throw new AppError("Inform a valid email. ");
     }
 
+    const userUsingThisEmail = await this.userRepository.findByEmail(email);
+
+    if (userUsingThisEmail) {
+      throw new AppError("There is already an account registered with this email.");
+    }
+
     if (!password) {
       throw new AppError("Inform a valid password.");
     }
