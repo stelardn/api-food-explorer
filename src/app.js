@@ -11,7 +11,6 @@ app.use(appRoutes);
 
 
 const AppError = require("./utils/AppError");
-
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
