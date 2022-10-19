@@ -1,5 +1,6 @@
 const UserCreateService = require("../services/UserCreateService");
 const UserRepositoryInMemory = require("../repositories/UserRepositoryInMemory");
+const AppError = require("../utils/AppError");
 
 const userRepository = new UserRepositoryInMemory();
 const userCreateService = new UserCreateService(userRepository);
@@ -17,6 +18,10 @@ class UsersController {
     const { id } = request.query;
 
     const user = await userRepository.findById(id);
+
+    if (!user) {
+      throw new AppError("Usuário não encontrado.")
+    }
 
     return response.json({ user });
   }

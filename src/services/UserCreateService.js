@@ -10,21 +10,21 @@ class UserCreateService {
   async execute({ name, email, password }) {
 
     if (!name) {
-      throw new AppError("Inform a valid name.");
+      throw new AppError("Informe um nome válido.");
     }
 
     if (!email) {
-      throw new AppError("Inform a valid email. ");
+      throw new AppError("Informe um email válido.");
     }
 
     const userUsingThisEmail = await this.userRepository.findByEmail(email);
 
     if (userUsingThisEmail) {
-      throw new AppError("There is already an account registered with this email.");
+      throw new AppError("Já existe uma conta registrada com esse email");
     }
 
     if (!password) {
-      throw new AppError("Inform a valid password.");
+      throw new AppError("Informe uma senha válida.");
     }
 
     const hashedPassword = await hash(password, 8);

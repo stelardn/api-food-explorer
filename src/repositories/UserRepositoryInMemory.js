@@ -1,3 +1,5 @@
+const AppError = require("../utils/AppError");
+
 class UserRepositoryInMemory {
   users = [
     {
