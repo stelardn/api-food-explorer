@@ -37,7 +37,6 @@ class MealRepositoryInMemory {
   async findByName(name) {
     const existingMeal = this.meals.find(meal => meal.name === name);
 
-
     return existingMeal;
   }
 
@@ -45,6 +44,12 @@ class MealRepositoryInMemory {
     const allMeals = this.meals;
 
     return { allMeals };
+  }
+
+  async findById(id) {
+    const meal = this.meals.find(meal => meal.id === Number(id));
+
+    return meal;
   }
 
 

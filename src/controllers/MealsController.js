@@ -18,6 +18,14 @@ class MealsController {
 
     return response.json({ meals });
   }
+
+  async show(request, response) {
+    const { id } = request.params;
+
+    const meal = await mealRepository.findById(id);
+
+    return response.json({ meal });
+  }
 }
 
 module.exports = MealsController;

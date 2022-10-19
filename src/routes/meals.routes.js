@@ -6,5 +6,6 @@ const mealsController = new MealsController();
 
 mealsRoutes.post("/", mealsController.create);
 mealsRoutes.get("/", mealsController.index);
+mealsRoutes.get("/:id", mealsController.show);
 
 module.exports = mealsRoutes;
