@@ -52,6 +52,26 @@ class MealRepositoryInMemory {
     return meal;
   }
 
+  // update
+  async updateText(mealNewInfoEntry) {
+    const { id } = mealNewInfoEntry;
+
+    const mealIndex = this.meals.indexOf(meal => meal.id === Number(id));
+
+    const previousMeal = this.meals[mealIndex];
+
+    let newMeal = {};
+
+    newMeal.name = mealNewInfoEntry.name ?? previousMeal.name;
+    newMeal.ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
+    newMeal.price = mealNewInfoEntry.price ?? previousMeal.price;
+    newMeal.description = mealNewInfoEntry.description ?? previousMeal.description;
+
+    this.meals[mealIndex] = newMeal;
+
+    return this.meals[mealIndex];
+  }
+
 
 }
 
