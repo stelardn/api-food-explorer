@@ -12,6 +12,12 @@ class MealsController {
     return response.status(201).json({ meal });
 
   }
+
+  async index(request, response) {
+    const meals = await mealRepository.selectAll();
+
+    return response.json({ meals });
+  }
 }
 
 module.exports = MealsController;

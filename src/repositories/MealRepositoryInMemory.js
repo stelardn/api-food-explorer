@@ -1,11 +1,20 @@
 class MealRepositoryInMemory {
   meals = [
     {
+      id: 1,
       name: "Salada Caesar",
       ingredients: ["frango", "alface", "tomate"],
       price: 24,
       description: "Alface, tomate, tiras de frango, torradas em cubos e molho Caesar."
-    }
+    },
+    {
+      id: 2,
+      name: "Salada Mediterrânea",
+      ingredients: ["alface", "tomate cereja", "palmito", "rúcula"],
+      price: 24,
+      description: "Alface, tomate, tiras de frango, torradas em cubos e molho Caesar."
+    },
+
   ];
 
   async create({ name, ingredients, price, description }) {
@@ -30,6 +39,12 @@ class MealRepositoryInMemory {
 
 
     return existingMeal;
+  }
+
+  async selectAll() {
+    const allMeals = this.meals;
+
+    return { allMeals };
   }
 
 
