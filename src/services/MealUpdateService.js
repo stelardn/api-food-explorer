@@ -11,10 +11,20 @@ class MealUpdateService {
 
   async executeTextUpdate(mealNewInfo) {
     const { id } = mealNewInfo;
-    const mealExists = this.mealRepository.findById(id);
+    const mealExists = await this.mealRepository.findById(id);
 
     if (!mealExists) {
       throw new AppError("Prato não encontrado.");
+    }
+
+    if (mealNewInfo.name) {
+      const mealWithThisName = await this.mealRepository.findByName(mealNewInfo.name);
+
+      const nameUnavailable = mealWithThisName.id !== Number(id);
+
+      if (nameUnavailable) {
+        throw new AppError("Este nome não está disponível.")
+      }
     }
 
     const updatedMeal = await this.mealRepository.updateText({ id, ...mealNewInfo });

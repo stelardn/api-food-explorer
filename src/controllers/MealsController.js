@@ -35,9 +35,9 @@ class MealsController {
   async update(request, response) {
     const { id } = request.query;
 
-    const { name, ingredients, price, description } = request.body;
+    const update = request.body;
 
-    const newMeal = await mealUpdateService.executeTextUpdate({ id, name, ingredients, price, description });
+    const newMeal = await mealUpdateService.executeTextUpdate({ id, ...update });
 
     return response.json({ newMeal });
   }
