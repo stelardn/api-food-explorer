@@ -4,6 +4,7 @@ class MealCreateService {
   constructor(mealRepository) {
     this.mealRepository = mealRepository;
   }
+
   async execute(data) {
     const { name, ingredients, price, description, picture } = data;
 

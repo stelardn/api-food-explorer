@@ -8,5 +8,6 @@ mealsRoutes.post("/", mealsController.create);
 mealsRoutes.get("/", mealsController.index);
 mealsRoutes.get("/:id", mealsController.show);
 mealsRoutes.put("/", mealsController.update);
+mealsRoutes.delete("/", mealsController.delete);
 
 module.exports = mealsRoutes;

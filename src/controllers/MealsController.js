@@ -1,9 +1,12 @@
+const { request, response } = require("express");
 const MealRepositoryInMemory = require("../repositories/MealRepositoryInMemory");
 const mealRepository = new MealRepositoryInMemory();
 const MealCreateService = require("../services/MealCreateService");
 const mealCreateService = new MealCreateService(mealRepository);
 const MealUpdateService = require("../services/MealUpdateService");
 const mealUpdateService = new MealUpdateService(mealRepository);
+const MealDeleteService = require("../services/MealDeleteService");
+const mealDeleteService = new MealDeleteService(mealRepository);
 
 class MealsController {
   async create(request, response) {
@@ -37,6 +40,14 @@ class MealsController {
     const newMeal = await mealUpdateService.executeTextUpdate({ id, name, ingredients, price, description });
 
     return response.json({ newMeal });
+  }
+
+  async delete(request, response) {
+    const { id } = request.query;
+
+    await mealDeleteService.execute(id);
+
+    return response.json({});
   }
 }
 

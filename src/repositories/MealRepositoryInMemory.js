@@ -72,6 +72,20 @@ class MealRepositoryInMemory {
     return this.meals[mealIndex];
   }
 
+  async updatePicture(picture) {
+
+  }
+
+  async delete(id) {
+    this.meals = this.meals.filter(meal => meal.id !== Number(id));
+
+    console.log(this.meals);
+
+    return;
+  }
+
+
+
 
 }
 
