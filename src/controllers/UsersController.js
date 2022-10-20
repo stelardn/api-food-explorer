@@ -1,8 +1,8 @@
 const UserCreateService = require("../services/UserCreateService");
-const UserRepositoryInMemory = require("../repositories/UserRepositoryInMemory");
+const UserRepository = require("../repositories/UserRepository");
 const AppError = require("../utils/AppError");
 
-const userRepository = new UserRepositoryInMemory();
+const userRepository = new UserRepository();
 const userCreateService = new UserCreateService(userRepository);
 class UsersController {
   async create(request, response) {
