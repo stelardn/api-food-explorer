@@ -1,6 +1,6 @@
 const { request, response } = require("express");
-const MealRepositoryInMemory = require("../repositories/MealRepositoryInMemory");
-const mealRepository = new MealRepositoryInMemory();
+const MealRepository = require("../repositories/MealRepository");
+const mealRepository = new MealRepository();
 const MealCreateService = require("../services/MealCreateService");
 const mealCreateService = new MealCreateService(mealRepository);
 const MealUpdateService = require("../services/MealUpdateService");
@@ -33,7 +33,7 @@ class MealsController {
   }
 
   async update(request, response) {
-    const { id } = request.query;
+    const id = Number(request.query.id);
 
     const update = request.body;
 

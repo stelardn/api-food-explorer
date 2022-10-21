@@ -20,11 +20,14 @@ class MealUpdateService {
     if (mealNewInfo.name) {
       const mealWithThisName = await this.mealRepository.findByName(mealNewInfo.name);
 
-      const nameUnavailable = mealWithThisName.id !== Number(id);
+      if (mealWithThisName) {
+        const nameUnavailable = mealWithThisName.id !== id;
 
-      if (nameUnavailable) {
-        throw new AppError("Este nome não está disponível.")
+        if (nameUnavailable) {
+          throw new AppError("Este nome não está disponível.")
+        }
       }
+
     }
 
     const updatedMeal = await this.mealRepository.updateText({ id, ...mealNewInfo });
