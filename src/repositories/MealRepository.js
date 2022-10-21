@@ -2,19 +2,20 @@ const knex = require("../database/knex");
 
 class MealRepository {
   async create({ name, ingredients, price, description }) {
-    // const meal = {
-    //   id: Math.floor(Math.random() * 1000) + 1,
-    //   name,
-    //   ingredients,
-    //   price,
-    //   description
-    // }
 
-    const meal = await knex("meals").insert({ name, price, description });
+    const mealId = await knex("meals").insert({ name, price, description });
 
-    // addingredients
+    if (ingredients) {
+      ingredients.map(async (ingredient) => {
+        await knex("ingredients").insert({
+          name: ingredient,
+          meal_id: mealId
+        })
+      });
 
-    return meal;
+    }
+
+    return mealId;
   }
 
   async createPicture(picture) {
