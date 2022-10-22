@@ -5,8 +5,8 @@ const OrdersController = require('../controllers/OrdersController');
 const ordersController = new OrdersController();
 
 ordersRoutes.post('/', ordersController.create);
-ordersRoutes.get('/', ordersController.index);
-ordersRoutes.get('/:id', ordersController.show);
-ordersRoutes.put('/', ordersController.update);
+// ordersRoutes.get('/', ordersController.index);
+// ordersRoutes.get('/:id', ordersController.show);
+// ordersRoutes.put('/', ordersController.update);
 
 module.exports = ordersRoutes;
