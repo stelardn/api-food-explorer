@@ -1,87 +1,87 @@
 class MealRepositoryInMemory {
-  meals = [
-    {
-      id: 1,
-      name: "Salada Caesar",
-      ingredients: ["frango", "alface", "tomate"],
-      price: 24,
-      description: "Alface, tomate, tiras de frango, torradas em cubos e molho Caesar."
-    },
-    {
-      id: 2,
-      name: "Salada Mediterrânea",
-      ingredients: ["alface", "tomate cereja", "palmito", "rúcula"],
-      price: 24,
-      description: "Alface, tomate, tiras de frango, torradas em cubos e molho Caesar."
-    },
+    meals = [
+        {
+            id: 1,
+            name: 'Salada Caesar',
+            ingredients: ['frango', 'alface', 'tomate'],
+            price: 24,
+            description: 'Alface, tomate, tiras de frango, torradas em cubos e molho Caesar.'
+        },
+        {
+            id: 2,
+            name: 'Salada Mediterrânea',
+            ingredients: ['alface', 'tomate cereja', 'palmito', 'rúcula'],
+            price: 24,
+            description: 'Alface, tomate, tiras de frango, torradas em cubos e molho Caesar.'
+        },
 
-  ];
+    ];
 
-  async create({ name, ingredients, price, description }) {
-    const meal = {
-      id: Math.floor(Math.random() * 1000) + 1,
-      name,
-      ingredients,
-      price,
-      description
+    async create({ name, ingredients, price, description }) {
+        const meal = {
+            id: Math.floor(Math.random() * 1000) + 1,
+            name,
+            ingredients,
+            price,
+            description
+        };
+
+        this.meals.push(meal);
+
+        return meal;
     }
 
-    this.meals.push(meal);
+    // async createPicture(picture) {
+    // }
 
-    return meal;
-  }
+    async findByName(name) {
+        const existingMeal = this.meals.find(meal => meal.name === name);
 
-  async createPicture(picture) {
-  }
+        return existingMeal;
+    }
 
-  async findByName(name) {
-    const existingMeal = this.meals.find(meal => meal.name === name);
+    async selectAll() {
+        const allMeals = this.meals;
 
-    return existingMeal;
-  }
+        return { allMeals };
+    }
 
-  async selectAll() {
-    const allMeals = this.meals;
+    async findById(id) {
+        const meal = this.meals.find(meal => meal.id === Number(id));
 
-    return { allMeals };
-  }
+        return meal;
+    }
 
-  async findById(id) {
-    const meal = this.meals.find(meal => meal.id === Number(id));
+    // update
+    async updateText(mealNewInfoEntry) {
+        const id = Number(mealNewInfoEntry.id);
 
-    return meal;
-  }
+        const previousMeal = this.meals.find(meal => meal.id === id);
+        const mealIndex = this.meals.indexOf(previousMeal);
 
-  // update
-  async updateText(mealNewInfoEntry) {
-    const id = Number(mealNewInfoEntry.id);
+        let newMeal = { id };
 
-    const previousMeal = this.meals.find(meal => meal.id === id);
-    const mealIndex = this.meals.indexOf(previousMeal);
+        newMeal.name = mealNewInfoEntry.name ?? previousMeal.name;
+        newMeal.ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
+        newMeal.price = mealNewInfoEntry.price ?? previousMeal.price;
+        newMeal.description = mealNewInfoEntry.description ?? previousMeal.description;
 
-    let newMeal = { id };
+        this.meals[mealIndex] = newMeal;
 
-    newMeal.name = mealNewInfoEntry.name ?? previousMeal.name;
-    newMeal.ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
-    newMeal.price = mealNewInfoEntry.price ?? previousMeal.price;
-    newMeal.description = mealNewInfoEntry.description ?? previousMeal.description;
+        return this.meals[mealIndex];
+    }
 
-    this.meals[mealIndex] = newMeal;
+    // async updatePicture(picture) {
 
-    return this.meals[mealIndex];
-  }
+    // }
 
-  async updatePicture(picture) {
+    async delete(id) {
+        this.meals = this.meals.filter(meal => meal.id !== Number(id));
 
-  }
+        console.log(this.meals);
 
-  async delete(id) {
-    this.meals = this.meals.filter(meal => meal.id !== Number(id));
-
-    console.log(this.meals);
-
-    return;
-  }
+        return;
+    }
 
 
 

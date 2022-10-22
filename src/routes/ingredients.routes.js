@@ -1,9 +1,9 @@
-const IngredientsController = require("../controllers/IngredientsController");
+const IngredientsController = require('../controllers/IngredientsController');
 const ingredientsController = new IngredientsController();
 
-const { Router } = require("express");
+const { Router } = require('express');
 const ingredientsRouter = Router();
 
-ingredientsRouter.get("/", ingredientsController.show);
+ingredientsRouter.get('/', ingredientsController.show);
 
 module.exports = ingredientsRouter;
