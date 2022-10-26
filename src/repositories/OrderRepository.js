@@ -19,13 +19,13 @@ class OrderRepository {
     }
 
     async update(orderUpdate) {
-        const { order_id, status, price } = orderUpdate;
+        const { order_id, price } = orderUpdate;
 
-        if (status) {
-            const updatedOrder = await knex('orders').update({ status, price }).where({ id: order_id });
+        // if (status) {
+        //     const updatedOrder = await knex('orders').update({ status, price }).where({ id: order_id });
 
-            return updatedOrder;
-        }
+        //     return updatedOrder;
+        // }
 
         const updatedOrder = await knex('orders').update({ price }).where({ id: order_id });
 
