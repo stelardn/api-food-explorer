@@ -7,6 +7,6 @@ const ordersController = new OrdersController();
 ordersRoutes.post('/', ordersController.create);
 // ordersRoutes.get('/', ordersController.index);
 // ordersRoutes.get('/:id', ordersController.show);
-// ordersRoutes.put('/', ordersController.update);
+ordersRoutes.put('/:id', ordersController.update);
 
 module.exports = ordersRoutes;
