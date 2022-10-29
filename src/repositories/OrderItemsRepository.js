@@ -19,8 +19,6 @@ class OrderItemsRepository {
         return updatedItem;
     }
 
-
-
     // retornar mealid, preço, quantidade
     async findOrderItemsWithPriceByOrderId(order_id) {
         const orderItems = await knex('order_items')
@@ -34,6 +32,34 @@ class OrderItemsRepository {
 
 
         return orderItems;
+    }
+
+    // async findOrderItemsNamesByMealId(meal_id) {
+    //     const orderNames = await knex('order_items')
+    //         .select([
+    //             'meals.id',
+    //             'meals.name',
+    //             'order_items.quantity',
+    //         ]).where({ meal_id })
+    //         .innerJoin('meals', 'meals.id', 'order_items.meal_id');
+
+    //     return orderNames;
+    // }
+
+    async findOrderItemsAndOrderInfo() {
+        const allOrderItemsWithInfo = await knex('order_items')
+            .select([
+                'orders.status',
+                'orders.id',
+                'order_items.quantity',
+                'meals.name',
+                'orders.created_at'
+            ])
+            .innerJoin('orders', 'orders.id', 'order_items.order_id')
+            .innerJoin('meals', 'meals.id', 'order_items.meal_id')
+            .orderBy('orders.id');
+
+        return allOrderItemsWithInfo;
     }
 
 }

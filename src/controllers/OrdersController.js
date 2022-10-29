@@ -9,6 +9,10 @@ const orderCreateService = new OrderCreateService(orderRepository);
 
 const OrderUpdateService = require('../services/Orders/OrderUpdateService');
 const orderUpdateService = new OrderUpdateService(orderRepository, orderItemsRepository);
+
+const OrderIndexService = require('../services/Orders/OrderIndexService');
+const orderIndexService = new OrderIndexService(orderRepository, orderItemsRepository);
+
 class OrdersController {
     async create(request, response) {
         const { user_id } = request.query;
@@ -28,6 +32,14 @@ class OrdersController {
         const orderUpdated = await orderUpdateService.execute({ id, meal_id, quantity });
 
         return response.json(`Carrinho atualizado! Total atual: R$${orderUpdated.price}.`);
+    }
+
+    async index(request, response) {
+        const user_id = request.query; // auth
+
+        const allOrders = await orderIndexService.getAll();
+
+        return response.json({ allOrders });
     }
 }
 

@@ -32,6 +32,20 @@ class OrderRepository {
         return updatedOrder;
     }
 
+    // async listAll() {
+    //     const allOrders = await knex('orders')
+    //         .select([
+    //             'orders.id',
+    //             'orders.status',
+    //             'orders.created_at',
+    //             'order_items.quantity'
+    //         ])
+    //         .innerJoin('order_items', 'order_items.order_id', 'orders.id');
+
+
+    //     return allOrders;
+    // }
+
 }
 
 module.exports = OrderRepository;
