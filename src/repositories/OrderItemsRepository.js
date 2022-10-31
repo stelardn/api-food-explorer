@@ -34,26 +34,36 @@ class OrderItemsRepository {
         return orderItems;
     }
 
-    // async findOrderItemsNamesByMealId(meal_id) {
+    async findAllOrders() {
+        const allOrdersWithInfo = knex('orders').select([
+            'id',
+            'status',
+            'created_at'
+        ]);
+
+        return allOrdersWithInfo;
+    }
+
+    // listar todas as informações E o order_id
+    // depois usar o map para pegar todos os itens onde o order_id == order.id
+    // async findOrderItemsNamesByMealId(order_id) {
     //     const orderNames = await knex('order_items')
     //         .select([
     //             'meals.id',
     //             'meals.name',
     //             'order_items.quantity',
-    //         ]).where({ meal_id })
+    //         ]).where({ order_id })
     //         .innerJoin('meals', 'meals.id', 'order_items.meal_id');
 
     //     return orderNames;
     // }
 
-    async findOrderItemsAndOrderInfo() {
+    async findOrderItemsWithInfo() {
         const allOrderItemsWithInfo = await knex('order_items')
             .select([
-                'orders.status',
                 'orders.id',
                 'order_items.quantity',
                 'meals.name',
-                'orders.created_at'
             ])
             .innerJoin('orders', 'orders.id', 'order_items.order_id')
             .innerJoin('meals', 'meals.id', 'order_items.meal_id')
