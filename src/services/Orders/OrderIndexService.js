@@ -1,4 +1,3 @@
-const { default: knex } = require("knex");
 const AppError = require("../../utils/AppError");
 
 class OrderIndexService {
@@ -8,8 +7,6 @@ class OrderIndexService {
     }
 
     async getAll() {
-        // const allItems = await this.orderItemsRepository.findOrderItemsAndOrderInfo();
-
         const allOrders = await this.orderItemsRepository.findAllOrders();
 
 

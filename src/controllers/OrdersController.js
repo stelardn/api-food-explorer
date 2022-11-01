@@ -13,6 +13,9 @@ const orderUpdateService = new OrderUpdateService(orderRepository, orderItemsRep
 const OrderIndexService = require('../services/Orders/OrderIndexService');
 const orderIndexService = new OrderIndexService(orderRepository, orderItemsRepository);
 
+const OrderShowService = require('../services/Orders/OrderShowService');
+const orderShowService = new OrderShowService(orderRepository, orderItemsRepository);
+
 class OrdersController {
     async create(request, response) {
         const { user_id } = request.query;
@@ -39,7 +42,17 @@ class OrdersController {
 
         const allOrders = await orderIndexService.getAll();
 
-        return response.json({ allOrders });
+        return response.json(allOrders);
+    }
+
+    async show(request, response) {
+        const user_id = request.query; // auth
+
+        const { id } = request.params;
+
+        const order = await orderShowService.getOrder(id);
+
+        return response.json(order);
     }
 }
 

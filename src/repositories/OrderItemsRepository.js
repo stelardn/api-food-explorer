@@ -24,6 +24,7 @@ class OrderItemsRepository {
         const orderItems = await knex('order_items')
             .select([
                 'meals.id',
+                'meals.name',
                 'meals.price',
                 'order_items.quantity',
             ])
@@ -44,13 +45,14 @@ class OrderItemsRepository {
         return allOrdersWithInfo;
     }
 
+
     // listar todas as informações E o order_id
     // depois usar o map para pegar todos os itens onde o order_id == order.id
-    // async findOrderItemsNamesByMealId(order_id) {
+    // async findOrderItemsNamesByOrderId(order_id) {
     //     const orderNames = await knex('order_items')
     //         .select([
-    //             'meals.id',
     //             'meals.name',
+    //             'meal.price',
     //             'order_items.quantity',
     //         ]).where({ order_id })
     //         .innerJoin('meals', 'meals.id', 'order_items.meal_id');
@@ -58,19 +60,21 @@ class OrderItemsRepository {
     //     return orderNames;
     // }
 
-    async findOrderItemsWithInfo() {
-        const allOrderItemsWithInfo = await knex('order_items')
-            .select([
-                'orders.id',
-                'order_items.quantity',
-                'meals.name',
-            ])
-            .innerJoin('orders', 'orders.id', 'order_items.order_id')
-            .innerJoin('meals', 'meals.id', 'order_items.meal_id')
-            .orderBy('orders.id');
+    // async findOrderItemsWithInfo(order_id) {
+    //     const allOrderItemsWithInfo = await knex('order_items')
+    //         .select([
+    //             'meals.name',
+    //             'meals.price',
+    //             'order_items.quantity',
+    //             'orders.price'
+    //         ])
+    //         .where({ order_id })
+    //         .innerJoin('orders', 'orders.id', 'order_items.order_id')
+    //         .innerJoin('meals', 'meals.id', 'order_items.meal_id')
+    //     // .orderBy('id');
 
-        return allOrderItemsWithInfo;
-    }
+    //     return allOrderItemsWithInfo;
+    // }
 
 }
 
