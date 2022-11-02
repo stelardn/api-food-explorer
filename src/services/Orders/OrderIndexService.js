@@ -12,7 +12,7 @@ class OrderIndexService {
 
         if (allOrders.length > 0) {
 
-            const allItems = await this.orderItemsRepository.findOrderItemsWithInfo();
+            const allItems = await this.orderItemsRepository.findOrderItemsAndOrderInfo();
 
             const allOrdersWithItems = allOrders.map(order => {
                 const orderItems = allItems.filter(item => item.id == order.id); // item id é o order id do item
