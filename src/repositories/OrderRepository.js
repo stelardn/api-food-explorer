@@ -32,6 +32,12 @@ class OrderRepository {
         return updatedOrder;
     }
 
+    async updateStatus({ status, id }) {
+        const updatedStatus = await knex('orders').update({ status }).where({ id });
+
+        return updatedStatus;
+    }
+
     // async listAll() {
     //     const allOrders = await knex('orders')
     //         .select([

@@ -8,5 +8,6 @@ ordersRoutes.post('/', ordersController.create);
 ordersRoutes.get('/', ordersController.index);
 ordersRoutes.get('/:id', ordersController.show);
 ordersRoutes.put('/:id', ordersController.update);
+ordersRoutes.patch('/:id', ordersController.updateStatus);
 
 module.exports = ordersRoutes;

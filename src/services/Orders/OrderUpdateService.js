@@ -55,6 +55,18 @@ class OrderUpdateService {
 
         return orderUpdate;
     }
+
+    async updateStatus({ id, status }) {
+        const order = await this.orderRepository.findById(id);
+
+        if (!order) {
+            throw new AppError('Pedido não encontrado.')
+        }
+
+        const orderUpdated = await this.orderRepository.updateStatus({ status, id })
+
+        return orderUpdated;
+    }
 }
 
 module.exports = OrderUpdateService;

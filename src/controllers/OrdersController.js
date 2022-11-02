@@ -54,6 +54,17 @@ class OrdersController {
 
         return response.json(order);
     }
+
+    async updateStatus(request, response) {
+        const { id } = request.params;
+
+        const { status } = request.body;
+
+        const statusUpdated = await orderUpdateService.updateStatus({ id, status });
+
+        return response.json(statusUpdated);
+
+    }
 }
 
 module.exports = OrdersController;
