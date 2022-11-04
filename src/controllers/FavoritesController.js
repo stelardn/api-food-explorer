@@ -5,9 +5,7 @@ const AppError = require('../utils/AppError');
 
 class FavoritesController {
     async index(request, response) {
-        // const user_id = request.user.id;
-
-        const { user_id } = request.query;
+        const user_id = request.user.id;
 
         const myFavorites = await favoritesRepository.indexUserFavorites(user_id);
 
@@ -15,9 +13,9 @@ class FavoritesController {
     }
 
     async create(request, response) {
-        // const user_id = request.user.id;
+        const user_id = request.user.id;
 
-        const { meal_id, user_id } = request.body;
+        const { meal_id } = request.body;
 
         const existingFavorite = await favoritesRepository.findExistingFavorite({ meal_id, user_id });
 

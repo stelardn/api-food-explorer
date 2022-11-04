@@ -3,8 +3,33 @@ const { verify } = require('jsonwebtoken');
 
 const AppError = require('../utils/AppError');
 
-async function ensureAuthenticated((request, response, next) => {
+function ensureAuthenticated(request, response, next) {
+    const auth = request.headers.authorization;
 
-})
+    if (!auth) {
+        throw new AppError('JWT token não encontrado.', 401);
+    }
+
+    const [, token] = auth.split(' ');
+
+    try {
+        const { sub: user_id } = verify(token, authConfig.jwt.secret);
+
+        request.user = {
+            id: Number(user_id)
+        };
+
+        return next();
+
+    } catch {
+        throw new AppError('JWT token não autorizado.', 401);
+    }
+
+
+
+    return next;
+
+
+}
 
 module.exports = ensureAuthenticated;
