@@ -60,12 +60,14 @@ class MealRepository {
 
         return meal;
 
-    // const ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
+        // const ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
     }
 
-    // async updatePicture(picture) {
+    async updatePicture({ filename, id }) {
+        await knex('meals').update({ picture: filename }).where({ id });
 
-    // }
+        return;
+    }
 
     async delete(id) {
         await knex('meals').delete().where({ id: Number(id) });
