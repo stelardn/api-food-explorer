@@ -18,7 +18,7 @@ const orderShowService = new OrderShowService(orderRepository, orderItemsReposit
 
 class OrdersController {
     async create(request, response) {
-        const { user_id } = request.query;
+        const user_id = request.user.id;
 
         const order = await orderCreateService.execute({ user_id });
 
@@ -26,7 +26,7 @@ class OrdersController {
     }
 
     async update(request, response) {
-        const { user_id } = request.query;
+        const user_id = request.user.id;
 
         const { id } = request.params; // order id
 
@@ -38,7 +38,7 @@ class OrdersController {
     }
 
     async index(request, response) {
-        const user_id = request.query; // auth
+        const user_id = request.user.id;
 
         const allOrders = await orderIndexService.getAll();
 
@@ -46,8 +46,6 @@ class OrdersController {
     }
 
     async show(request, response) {
-        const user_id = request.query; // auth
-
         const { id } = request.params;
 
         const order = await orderShowService.getOrder(id);
