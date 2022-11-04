@@ -32,7 +32,7 @@ class MealsController {
     }
 
     async update(request, response) {
-        const id = Number(request.query.id);
+        const { id } = request.params;
 
         const update = request.body;
 
@@ -42,7 +42,7 @@ class MealsController {
     }
 
     async delete(request, response) {
-        const { id } = request.query;
+        const { id } = request.params;
 
         await mealDeleteService.execute(id);
 
