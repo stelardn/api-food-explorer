@@ -15,9 +15,9 @@ class UsersController {
     }
 
     async show(request, response) {
-        const { id } = request.query;
+        const user_id = request.user.id;
 
-        const user = await userRepository.findById(id);
+        const user = await userRepository.findById(user_id);
 
         if (!user) {
             throw new AppError('Usuário não encontrado.');

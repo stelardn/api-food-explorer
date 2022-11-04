@@ -8,11 +8,13 @@ const ordersRouter = require('./orders.routes');
 const favoritesRouter = require('./favorites.routes');
 const sessionsRouter = require('./sessions.routes');
 
+const ensureAuthenticated = require('../middlewares/ensureAuthenticated');
+
 appRoutes.use('/users', usersRouter);
-appRoutes.use('/meals', mealsRouter);
-appRoutes.use('/ingredients', ingredientsRouter);
-appRoutes.use('/orders', ordersRouter);
-appRoutes.use('/favorites', favoritesRouter);
+appRoutes.use('/meals', ensureAuthenticated, mealsRouter);
+appRoutes.use('/ingredients', ensureAuthenticated, ingredientsRouter);
+appRoutes.use('/orders', ensureAuthenticated, ordersRouter);
+appRoutes.use('/favorites', ensureAuthenticated, favoritesRouter);
 appRoutes.use('/sessions', sessionsRouter);
 
 module.exports = appRoutes;
