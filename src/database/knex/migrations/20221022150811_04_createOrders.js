@@ -2,7 +2,7 @@ exports.up = knex => knex.schema.createTable('orders', table => {
     table.increments('id');
     table.integer('user_id').references('id').inTable('users').onDelete('CASCADE');
     table.float('price', 2);
-    table.text('status');
+    table.integer('status').references('id').inTable('status').onDelete('CASCADE');
     table.timestamp('created_at').default(knex.fn.now());
 });
 
