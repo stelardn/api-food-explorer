@@ -1,5 +1,6 @@
 const knex = require('../database/knex');
 
+
 class UserRepository {
 
     async create({ name, email, password }) {

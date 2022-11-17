@@ -7,7 +7,7 @@ class MealRepository {
 
         if (ingredients) {
             ingredients.map(async (ingredient) => {
-                await knex('meal_ingredients').insert({
+                await knex('ingredients').insert({
                     name: ingredient,
                     meal_id: mealId
                 });
