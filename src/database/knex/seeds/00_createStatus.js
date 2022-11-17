@@ -6,8 +6,9 @@ exports.seed = async function (knex) {
     // Deletes ALL existing entries
     await knex('status').del();
     await knex('status').insert([
-        { id: 1, name: 'Pendente', color: 'red' },
-        { id: 2, name: 'Preparando', color: 'orange' },
-        { id: 3, name: 'Entregue', color: 'green' }
+        { id: 1, name: 'Carrinho', color: 'white' },
+        { id: 2, name: 'Pendente', color: 'red' },
+        { id: 3, name: 'Preparando', color: 'orange' },
+        { id: 4, name: 'Entregue', color: 'green' }
     ]);
 };
