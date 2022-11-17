@@ -13,7 +13,7 @@ class OrderRepository {
     }
 
     async findById(id) {
-        const order = await knex("orders").where({ id }).first();
+        const order = await knex('orders').where({ id }).first();
 
         return order;
     }
@@ -38,19 +38,17 @@ class OrderRepository {
         return updatedStatus;
     }
 
-    // async listAll() {
-    //     const allOrders = await knex('orders')
-    //         .select([
-    //             'orders.id',
-    //             'orders.status',
-    //             'orders.created_at',
-    //             'order_items.quantity'
-    //         ])
-    //         .innerJoin('order_items', 'order_items.order_id', 'orders.id');
 
+    async findUserOrders(user_id) {
+        const allOrdersWithInfo = knex('orders').select([
+            'id',
+            'status',
+            'price',
+            'created_at'
+        ]).where({ user_id });
 
-    //     return allOrders;
-    // }
+        return allOrdersWithInfo;
+    }
 
 }
 

@@ -45,37 +45,6 @@ class OrderItemsRepository {
         return allOrdersWithInfo;
     }
 
-
-    // listar todas as informações E o order_id
-    // depois usar o map para pegar todos os itens onde o order_id == order.id
-    // async findOrderItemsNamesByOrderId(order_id) {
-    //     const orderNames = await knex('order_items')
-    //         .select([
-    //             'meals.name',
-    //             'meal.price',
-    //             'order_items.quantity',
-    //         ]).where({ order_id })
-    //         .innerJoin('meals', 'meals.id', 'order_items.meal_id');
-
-    //     return orderNames;
-    // }
-
-    // async findOrderItemsWithInfo(order_id) {
-    //     const allOrderItemsWithInfo = await knex('order_items')
-    //         .select([
-    //             'meals.name',
-    //             'meals.price',
-    //             'order_items.quantity',
-    //             'orders.price'
-    //         ])
-    //         .where({ order_id })
-    //         .innerJoin('orders', 'orders.id', 'order_items.order_id')
-    //         .innerJoin('meals', 'meals.id', 'order_items.meal_id')
-    //     // .orderBy('id');
-
-    //     return allOrderItemsWithInfo;
-    // }
-
     async findOrderItemsAndOrderInfo() {
         const allOrderItemsWithInfo = await knex('order_items')
             .select([
@@ -86,6 +55,22 @@ class OrderItemsRepository {
             .innerJoin('orders', 'orders.id', 'order_items.order_id')
             .innerJoin('meals', 'meals.id', 'order_items.meal_id')
             .orderBy('orders.id');
+
+        return allOrderItemsWithInfo;
+    }
+
+    async findUserOrderItemsAndOrderInfo(user_id) {
+        const allOrderItemsWithInfo = await knex('order_items')
+            .select([
+                'orders.id',
+                'order_items.quantity',
+                'meals.name',
+                'meals.price'
+            ])
+            .innerJoin('orders', 'orders.id', 'order_items.order_id')
+            .innerJoin('meals', 'meals.id', 'order_items.meal_id')
+            .orderBy('orders.id')
+            .where({ user_id });
 
         return allOrderItemsWithInfo;
     }
