@@ -3,10 +3,10 @@ class OrderCreateService {
         this.orderRepository = orderRepository;
     }
 
-    async execute({user_id}){
+    async execute({ user_id }) {
         const order = {
             user_id,
-            status: 'Carrinho',
+            status: 1,
             price: 0,
         };
 

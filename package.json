@@ -8,6 +8,7 @@
     "dev": "nodemon ./src/server.js",
     "test": "jest",
     "migrate": "knex migrate:latest",
+    "seed": "knex seed:run",
     "prepare": "husky install"
   },
   "repository": {
