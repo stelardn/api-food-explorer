@@ -3,5 +3,3 @@ node_modules
 tabela.png
 
 .env
-
-src/database/database.db
