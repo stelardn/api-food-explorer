@@ -30,7 +30,7 @@ class MealRepository {
     async selectAll() {
         const allMeals = await knex('meals').select();
 
-        return { allMeals };
+        return allMeals;
     }
 
     async findById(id) {

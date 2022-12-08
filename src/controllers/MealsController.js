@@ -7,6 +7,9 @@ const mealUpdateService = new MealUpdateService(mealRepository);
 const MealDeleteService = require('../services/MealDeleteService');
 const mealDeleteService = new MealDeleteService(mealRepository);
 
+const FavoritesRepository = require('../repositories/FavoritesRepository');
+const favoritesRepository = new FavoritesRepository;
+
 class MealsController {
     async create(request, response) {
         const { name, ingredients, price, description, picture, type } = request.body;
@@ -18,9 +21,27 @@ class MealsController {
     }
 
     async index(request, response) {
+        const user_id = request.user.id;
+
         const meals = await mealRepository.selectAll();
 
-        return response.json({ meals });
+        const userFavorites = await favoritesRepository.indexUserFavorites(user_id);
+
+        const mealsWithFavorites = meals.map(meal => {
+
+            const mealWithFavorite = { ...meal }
+            const isFavorite = userFavorites.filter(favorite => favorite.meal_id === meal.id);
+
+            if (isFavorite[0]) {
+                mealWithFavorite.isFavorite = true;
+            } else {
+                mealWithFavorite.isFavorite = false;
+            }
+
+            return mealWithFavorite;
+        })
+
+        return response.json(mealsWithFavorites);
     }
 
     async show(request, response) {
