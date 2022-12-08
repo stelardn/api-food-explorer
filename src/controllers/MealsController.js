@@ -9,9 +9,9 @@ const mealDeleteService = new MealDeleteService(mealRepository);
 
 class MealsController {
     async create(request, response) {
-        const { name, ingredients, price, description, picture } = request.body;
+        const { name, ingredients, price, description, picture, type } = request.body;
 
-        const meal = await mealCreateService.execute({ name, ingredients, price, description, picture });
+        const meal = await mealCreateService.execute({ name, ingredients, price, description, picture, type });
 
         return response.status(201).json({ meal });
 

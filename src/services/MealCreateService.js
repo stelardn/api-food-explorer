@@ -6,9 +6,9 @@ class MealCreateService {
     }
 
     async execute(data) {
-        const { name, ingredients, price, description, picture } = data;
+        const { name, ingredients, price, description, picture, type } = data;
 
-        if (!name || !ingredients || !price || !description) {
+        if (!name || !ingredients || !price || !description || !type) {
             throw new AppError('Preencha todos os campos.');
         }
 
@@ -18,7 +18,7 @@ class MealCreateService {
             throw new AppError('Já existe um prato cadastrado com esse nome. Para evitar confusão de pedidos, informe um nome diferente.');
         }
 
-        let meal = this.mealRepository.create({ name, ingredients, price, description });
+        let meal = this.mealRepository.create({ name, ingredients, price, description, type });
 
         if (picture) {
             const picture = this.mealRepository.createPicture(picture);
