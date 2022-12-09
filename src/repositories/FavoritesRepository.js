@@ -29,9 +29,7 @@ class FavoritesRepository {
     }
 
     async remove(id) {
-        await knex('favorites').delete().where({ id });
-
-        return;
+        return await knex('favorites').delete().where({ meal_id: id });
     }
 }
 

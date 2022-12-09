@@ -39,7 +39,8 @@ class OrderItemsRepository {
         const allOrdersWithInfo = knex('orders').select([
             'id',
             'status',
-            'created_at'
+            'created_at',
+            'user_id'
         ]);
 
         return allOrdersWithInfo;

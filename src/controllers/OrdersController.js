@@ -14,6 +14,7 @@ const OrderIndexService = require('../services/Orders/OrderIndexService');
 const orderIndexService = new OrderIndexService(orderRepository, orderItemsRepository);
 
 const OrderShowService = require('../services/Orders/OrderShowService');
+const AppError = require('../utils/AppError');
 const orderShowService = new OrderShowService(orderRepository, orderItemsRepository);
 
 class OrdersController {
@@ -40,9 +41,24 @@ class OrdersController {
     async index(request, response) {
         const user_id = request.user.id;
 
+        const { user } = request.query;
+
         const allOrders = await orderIndexService.getAll();
 
-        return response.json(allOrders);
+        let ordersResponse;
+
+        if (user) {
+            if (Number(user) === user_id) {
+                ordersResponse = allOrders.filter(order => order.user_id === user_id);
+            } else {
+                throw new AppError('Usuário não autorizado a acessar esse recurso.', 403);
+            }
+
+        } else {
+            ordersResponse = allOrders;
+        }
+
+        return response.json(ordersResponse);
     }
 
     async show(request, response) {
