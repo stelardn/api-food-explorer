@@ -19,7 +19,7 @@ class OrderIndexService {
 
                 return {
                     ...order,
-                    orderItems
+                    items: orderItems
                 }
             })
 
