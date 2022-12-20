@@ -7,7 +7,6 @@ class OrderUpdateService {
     }
 
     async execute({ id, meal_id, quantity }) {
-
         const order = await this.orderRepository.findById(id);
 
         if (!order) {
@@ -20,14 +19,19 @@ class OrderUpdateService {
             quantity
         }
 
-        // procurar o item no pedido pelo meal id
-        const itemIsInOrder = await this.orderItemsRepository.findItemInOrderByMealId(orderUpdate);
-
-        if (itemIsInOrder) {
-            const updatedItem = await this.orderItemsRepository.updateExistingItemQuantity(orderUpdate);
-
+        // remover o item se a quantidade for 0
+        if (quantity === 0) {
+            await this.orderItemsRepository.removeItem(meal_id, id);
         } else {
-            const addedItem = await this.orderItemsRepository.addItem(orderUpdate);
+            // procurar o item no pedido pelo meal id
+            const itemIsInOrder = await this.orderItemsRepository.findItemInOrderByMealId(orderUpdate);
+
+            if (itemIsInOrder) {
+                await this.orderItemsRepository.updateExistingItemQuantity(orderUpdate);
+
+            } else {
+                await this.orderItemsRepository.addItem(orderUpdate);
+            }
         }
 
         // OK: listar todos os itens incluidos no pedido, com quantidade e preço unitário

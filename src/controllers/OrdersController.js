@@ -27,8 +27,6 @@ class OrdersController {
     }
 
     async update(request, response) {
-        const user_id = request.user.id;
-
         const { id } = request.params; // order id
 
         const { meal_id, quantity } = request.body;
