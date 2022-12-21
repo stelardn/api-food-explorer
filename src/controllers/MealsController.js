@@ -10,6 +10,9 @@ const mealDeleteService = new MealDeleteService(mealRepository);
 const FavoritesRepository = require('../repositories/FavoritesRepository');
 const favoritesRepository = new FavoritesRepository;
 
+const IngredientsRepository = require('../repositories/IngredientsRepository');
+const ingredientsRepository = new IngredientsRepository();
+
 class MealsController {
     async create(request, response) {
         const { name, ingredients, price, description, picture, type } = request.body;
@@ -49,7 +52,14 @@ class MealsController {
 
         const meal = await mealRepository.findById(id);
 
-        return response.json({ meal });
+        const ingredients = await ingredientsRepository.findByMealId(id);
+
+        const mealWIthIngredients = {
+            ...meal,
+            ingredients
+        }
+
+        return response.json(mealWIthIngredients);
     }
 
     async update(request, response) {
