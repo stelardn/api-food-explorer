@@ -44,7 +44,7 @@ class OrderRepository {
             'id',
             'status',
             'price',
-            'created_at'
+            'updated_at'
         ]).where({ user_id });
 
         return allOrdersWithInfo;
