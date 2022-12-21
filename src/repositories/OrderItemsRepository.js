@@ -76,6 +76,10 @@ class OrderItemsRepository {
         return allOrderItemsWithInfo;
     }
 
+    async removeItem(meal_id, order_id) {
+        return await knex('order_items').delete().where({ meal_id, order_id });
+    }
+
 }
 
 module.exports = OrderItemsRepository;
