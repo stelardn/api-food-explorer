@@ -9,23 +9,27 @@ class OrderShowService {
     async getOrder(order_id) {
         const orderItems = await this.orderItemsRepository.findOrderItemsWithPriceByOrderId(order_id);
 
+        const orderInfo = await this.orderRepository.findById(order_id);
+
+        let order = {
+            items: [],
+            ...orderInfo,
+            price: 0
+        }
+
         if (orderItems.length > 0) {
             const price = orderItems.reduce((totalPrice, item) => {
                 return totalPrice + item.price * item.quantity
             }, 0);
 
-
-            const order = {
+            order = {
                 items: [...orderItems],
                 price
             }
-
-            return order;
         }
+        return order;
 
-        throw new AppError('Não foi possível buscar os dados.');
-
-
+        // throw new AppError('Não foi possível buscar os dados.');
     }
 }
 module.exports = OrderShowService;
