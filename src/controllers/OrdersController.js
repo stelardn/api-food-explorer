@@ -53,7 +53,7 @@ class OrdersController {
             }
 
         } else {
-            ordersResponse = allOrders;
+            ordersResponse = allOrders.filter(order => order.status !== 1);
         }
 
         return response.json(ordersResponse);
