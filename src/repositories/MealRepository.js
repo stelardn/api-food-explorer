@@ -27,8 +27,9 @@ class MealRepository {
         return existingMeal;
     }
 
-    async selectAll() {
-        const allMeals = await knex('meals').select();
+    async selectAll(filterName) {
+        const name = filterName ?? '';
+        const allMeals = await knex('meals').select().whereLike('name', `%${name}%`);
 
         return allMeals;
     }

@@ -26,7 +26,9 @@ class MealsController {
     async index(request, response) {
         const user_id = request.user.id;
 
-        const meals = await mealRepository.selectAll();
+        const { name } = request.query;
+
+        const meals = await mealRepository.selectAll(name);
 
         const userFavorites = await favoritesRepository.indexUserFavorites(user_id);
 
