@@ -35,17 +35,6 @@ class OrderItemsRepository {
         return orderItems;
     }
 
-    async findAllOrders() {
-        const allOrdersWithInfo = knex('orders').select([
-            'id',
-            'status',
-            'created_at',
-            'user_id'
-        ]);
-
-        return allOrdersWithInfo;
-    }
-
     async findOrderItemsAndOrderInfo() {
         const allOrderItemsWithInfo = await knex('order_items')
             .select([

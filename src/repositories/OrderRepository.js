@@ -38,7 +38,6 @@ class OrderRepository {
         return updatedStatus;
     }
 
-
     async findUserOrders(user_id) {
         const allOrdersWithInfo = knex('orders').select([
             'id',
@@ -46,6 +45,17 @@ class OrderRepository {
             'price',
             'updated_at'
         ]).where({ user_id });
+
+        return allOrdersWithInfo;
+    }
+
+    async findAllOrders() {
+        const allOrdersWithInfo = knex('orders').select([
+            'id',
+            'status',
+            'created_at',
+            'user_id'
+        ]);
 
         return allOrdersWithInfo;
     }

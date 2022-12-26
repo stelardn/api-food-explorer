@@ -50,15 +50,20 @@ class MealsController {
     }
 
     async show(request, response) {
+        const user_id = request.user.id;
+
         const { id } = request.params;
 
         const meal = await mealRepository.findById(id);
 
         const ingredients = await ingredientsRepository.findByMealId(id);
 
+        const isFavorite = await favoritesRepository.findExistingFavorite({ meal_id: id, user_id })
+
         const mealWIthIngredients = {
             ...meal,
-            ingredients
+            ingredients,
+            isFavorite: isFavorite ? true : false
         }
 
         return response.json(mealWIthIngredients);

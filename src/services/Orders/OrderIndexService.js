@@ -7,8 +7,7 @@ class OrderIndexService {
     }
 
     async getAll() {
-        const allOrders = await this.orderItemsRepository.findAllOrders();
-
+        const allOrders = await this.orderRepository.findAllOrders();
 
         if (allOrders.length > 0) {
 
@@ -21,7 +20,8 @@ class OrderIndexService {
                     ...order,
                     items: orderItems
                 }
-            })
+            });
+
 
             return allOrdersWithItems;
         }

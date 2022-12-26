@@ -24,7 +24,8 @@ class OrderShowService {
 
             order = {
                 items: [...orderItems],
-                price
+                price,
+                ...orderInfo
             }
         }
         return order;
