@@ -17,6 +17,10 @@ class MealsController {
     async create(request, response) {
         const { name, ingredients, price, description, picture, type } = request.body;
 
+        if (!type) {
+            request.body.type = 'Pratos principais';
+        }
+
         const meal = await mealCreateService.execute({ name, ingredients, price, description, picture, type });
 
         return response.status(201).json({ meal });

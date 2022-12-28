@@ -1,15 +1,17 @@
 const knex = require('../database/knex');
+const { noSpecialCharacters } = require('../utils/noSpecialCharacters');
 
 class MealRepository {
-    async create({ name, ingredients, price, description }) {
+    async create({ name, ingredients, price, description, type }) {
 
-        const mealId = await knex('meals').insert({ name, price, description });
+        const mealId = await knex('meals').insert({ name, price, description, type });
 
         if (ingredients) {
             ingredients.map(async (ingredient) => {
                 await knex('ingredients').insert({
                     name: ingredient,
-                    meal_id: mealId
+                    meal_id: mealId,
+                    picture: `${noSpecialCharacters(ingredient)}.png`
                 });
             });
 
