@@ -55,7 +55,7 @@ class OrderRepository {
             'status',
             'created_at',
             'user_id'
-        ]);
+        ]).orderBy('id', 'desc');
 
         return allOrdersWithInfo;
     }

@@ -13,6 +13,7 @@ class FavoritesRepository {
                 'meals.name',
                 'meals.picture',
                 'meals.price',
+                'meals.description',
                 'favorites.meal_id',
                 'favorites.id'
             ])
