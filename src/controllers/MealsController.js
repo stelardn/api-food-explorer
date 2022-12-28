@@ -30,9 +30,9 @@ class MealsController {
     async index(request, response) {
         const user_id = request.user.id;
 
-        const { name } = request.query;
+        const { filter } = request.query;
 
-        const meals = await mealRepository.selectAll(name);
+        const meals = await mealRepository.selectAll(filter);
 
         const userFavorites = await favoritesRepository.indexUserFavorites(user_id);
 

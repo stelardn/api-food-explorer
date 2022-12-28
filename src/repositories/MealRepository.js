@@ -30,9 +30,24 @@ class MealRepository {
     }
 
     async selectAll(filterName) {
-        const name = filterName ?? '';
-        const allMeals = await knex('meals').select().whereLike('name', `%${name}%`);
+        const filter = filterName ?? '';
 
+        const allMeals = await knex('meals')
+            .select(
+                [
+                    'meals.id',
+                    'meals.name',
+                    'meals.price',
+                    'meals.description',
+                    'meals.picture',
+                    'meals.type',
+                ]
+            )
+            .innerJoin('ingredients', 'meals.id', 'ingredients.meal_id')
+            .whereLike('meals.name', `%${filter}%`)
+            .orWhereLike('ingredients.name', `%${filter}%`)
+            .orderBy('meals.name')
+            .groupBy('meals.id');
         return allMeals;
     }
 
