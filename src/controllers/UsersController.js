@@ -1,5 +1,4 @@
-const UserCreateService = require('../services/UserCreateService');
-const UserRepository = require('../repositories/UserRepository');
+const AppError = require('../utils/AppError');
 
 const OrderItemsRepository = require('../repositories/OrderItemsRepository');
 const orderItemsRepository = new OrderItemsRepository();
@@ -10,9 +9,10 @@ const orderRepository = new OrderRepository();
 const OrderIndexService = require('../services/Orders/OrderIndexService');
 const orderIndexService = new OrderIndexService(orderRepository, orderItemsRepository);
 
-const AppError = require('../utils/AppError');
-
+const UserRepository = require('../repositories/UserRepository');
 const userRepository = new UserRepository();
+
+const UserCreateService = require('../services/UserCreateService');
 const userCreateService = new UserCreateService(userRepository);
 class UsersController {
     async create(request, response) {
@@ -30,7 +30,7 @@ class UsersController {
         let user = await userRepository.findById(user_id);
 
         if (!user) {
-            throw new AppError('Usuário não encontrado.');
+            throw new AppError('Usuário não encontrado.', 204);
         }
 
         const userOrders = await orderIndexService.getUserOrders(user_id);

@@ -20,9 +20,6 @@ class MealRepository {
         return mealId;
     }
 
-    // async createPicture(picture) {
-    // }
-
     async findByName(name) {
         const existingMeal = await knex('meals').where({ name }).first();
 
@@ -48,6 +45,7 @@ class MealRepository {
             .orWhereLike('ingredients.name', `%${filter}%`)
             .orderBy('meals.name')
             .groupBy('meals.id');
+
         return allMeals;
     }
 
@@ -57,7 +55,6 @@ class MealRepository {
         return meal;
     }
 
-    // update
     async updateText(mealNewInfoEntry) {
         const id = Number(mealNewInfoEntry.id);
 

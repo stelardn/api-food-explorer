@@ -1,7 +1,7 @@
+const AppError = require('../utils/AppError');
+
 const FavoritesRepository = require('../repositories/FavoritesRepository');
 const favoritesRepository = new FavoritesRepository();
-
-const AppError = require('../utils/AppError');
 
 class FavoritesController {
     async index(request, response) {

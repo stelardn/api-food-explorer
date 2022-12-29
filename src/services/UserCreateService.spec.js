@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 const UserCreateService = require('./UserCreateService');
 const UserRepositoryInMemory = require('../repositories/UserRepositoryInMemory');
 const AppError = require('../utils/AppError');
-const {describe, beforeEach, it, expect} = require('jest');
 
 describe('UserCreateService', () => {
     let userRepository = null;

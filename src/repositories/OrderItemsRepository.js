@@ -72,4 +72,3 @@ class OrderItemsRepository {
 }
 
 module.exports = OrderItemsRepository;
-// refactor: new (order)

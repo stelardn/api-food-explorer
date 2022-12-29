@@ -22,14 +22,8 @@ function ensureAuthenticated(request, response, next) {
         return next();
 
     } catch {
-        throw new AppError('JWT token não autorizado.', 401);
+        throw new AppError('JWT token não autorizado.', 403);
     }
-
-
-
-    return next;
-
-
 }
 
 module.exports = ensureAuthenticated;

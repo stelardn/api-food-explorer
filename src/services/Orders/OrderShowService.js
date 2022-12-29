@@ -1,5 +1,3 @@
-const AppError = require("../../utils/AppError");
-
 class OrderShowService {
     constructor(orderRepository, orderItemsRepository) {
         this.orderRepository = orderRepository;
@@ -29,8 +27,6 @@ class OrderShowService {
             }
         }
         return order;
-
-        // throw new AppError('Não foi possível buscar os dados.');
     }
 }
 module.exports = OrderShowService;

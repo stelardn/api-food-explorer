@@ -18,6 +18,7 @@ const appRoutes = require("./routes");
 app.use(appRoutes);
 
 const AppError = require("./utils/AppError");
+// eslint-disable-next-line no-unused-vars
 app.use((error, request, response, _next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({

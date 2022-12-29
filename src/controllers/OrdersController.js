@@ -1,3 +1,5 @@
+const AppError = require('../utils/AppError');
+
 const OrderRepository = require('../repositories/OrderRepository');
 const orderRepository = new OrderRepository();
 
@@ -14,7 +16,6 @@ const OrderIndexService = require('../services/Orders/OrderIndexService');
 const orderIndexService = new OrderIndexService(orderRepository, orderItemsRepository);
 
 const OrderShowService = require('../services/Orders/OrderShowService');
-const AppError = require('../utils/AppError');
 const orderShowService = new OrderShowService(orderRepository, orderItemsRepository);
 
 class OrdersController {

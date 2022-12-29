@@ -1,5 +1,3 @@
-const AppError = require('../../utils/AppError');
-
 class OrderIndexService {
     constructor(orderRepository, orderItemsRepository) {
         this.orderRepository = orderRepository;

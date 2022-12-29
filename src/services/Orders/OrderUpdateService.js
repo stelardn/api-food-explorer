@@ -19,11 +19,9 @@ class OrderUpdateService {
             quantity
         }
 
-        // remover o item se a quantidade for 0
         if (quantity === 0) {
             await this.orderItemsRepository.removeItem(meal_id, id);
         } else {
-            // procurar o item no pedido pelo meal id
             const itemIsInOrder = await this.orderItemsRepository.findItemInOrderByMealId(orderUpdate);
 
             if (itemIsInOrder) {
@@ -34,7 +32,6 @@ class OrderUpdateService {
             }
         }
 
-        // OK: listar todos os itens incluidos no pedido, com quantidade e preço unitário
         const allItemsInOrder = await this.orderItemsRepository.findOrderItemsWithPriceByOrderId(id);
 
         if (!allItemsInOrder[0]) {
