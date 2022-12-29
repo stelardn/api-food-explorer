@@ -44,7 +44,7 @@ exports.seed = async function (knex) {
             description: 'Torta de ameixa com massa amanteigada, polvilho em açúcar.',
             price: 49.97,
             picture: '005-prugna.png',
-            type: 'Pratos Principais'
+            type: 'Sobremesas'
         },
         {
             id: 6,

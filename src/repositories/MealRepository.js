@@ -67,28 +67,6 @@ class MealRepository {
         const price = mealNewInfoEntry.price ?? previousMeal.price;
         const description = mealNewInfoEntry.description ?? previousMeal.description;
 
-        // const ingredients = mealNewInfoEntry.ingredients ?? previousMeal.ingredients;
-
-        // se houver ingredientes:
-        // * verificar se são iguais
-        //      * se sim: não faz nada
-        //      * senão: 
-        //          * verifica se foi adicionado (filtrar os que não são iguais) e cria o novo
-        //          * E
-        //          * verifica se foi excluído e eclui o existente
-
-        // if (ingredients) {
-        //     ingredients.map(async (ingredient) => {
-        //         await knex('ingredients').insert({
-        //             name: ingredient,
-        //             meal_id: mealId
-        //         });
-        //     });
-
-        // }
-
-
-
         const meal = await knex('meals')
             .update({
                 name,

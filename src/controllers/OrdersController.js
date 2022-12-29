@@ -43,20 +43,25 @@ class OrdersController {
 
         const allOrders = await orderIndexService.getAll();
 
-        let ordersResponse;
+        if (allOrders) {
+            let ordersResponse;
 
-        if (user) {
-            if (Number(user) === user_id) {
-                ordersResponse = allOrders.filter(order => order.user_id === user_id);
+            if (user) {
+                if (Number(user) === user_id) {
+                    ordersResponse = allOrders.filter(order => order.user_id === user_id);
+                } else {
+                    throw new AppError('Usuário não autorizado a acessar esse recurso.', 403);
+                }
+
             } else {
-                throw new AppError('Usuário não autorizado a acessar esse recurso.', 403);
+                ordersResponse = allOrders.filter(order => order.user_id === user_id || order.status !== 1);
             }
 
-        } else {
-            ordersResponse = allOrders.filter(order => order.user_id === user_id || order.status !== 1);
+            return response.json(ordersResponse);
         }
 
-        return response.json(ordersResponse);
+        return response.status(204).json({});
+
     }
 
     async show(request, response) {

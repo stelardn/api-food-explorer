@@ -26,7 +26,7 @@ class OrderIndexService {
             return allOrdersWithItems;
         }
 
-        throw new AppError('Não foi possível buscar os dados.');
+        return;
 
 
     }
@@ -51,9 +51,7 @@ class OrderIndexService {
             return userOrdersWithItems;
         }
 
-        throw new AppError('Não foi possível buscar os dados.');
-
-
+        return;
     }
 
 

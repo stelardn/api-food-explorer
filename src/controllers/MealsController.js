@@ -1,17 +1,18 @@
 const MealRepository = require('../repositories/MealRepository');
 const mealRepository = new MealRepository();
+const IngredientsRepository = require('../repositories/IngredientsRepository');
+const ingredientsRepository = new IngredientsRepository();
+
 const MealCreateService = require('../services/MealCreateService');
 const mealCreateService = new MealCreateService(mealRepository);
 const MealUpdateService = require('../services/MealUpdateService');
-const mealUpdateService = new MealUpdateService(mealRepository);
+const mealUpdateService = new MealUpdateService(mealRepository, ingredientsRepository);
 const MealDeleteService = require('../services/MealDeleteService');
 const mealDeleteService = new MealDeleteService(mealRepository);
 
 const FavoritesRepository = require('../repositories/FavoritesRepository');
 const favoritesRepository = new FavoritesRepository;
 
-const IngredientsRepository = require('../repositories/IngredientsRepository');
-const ingredientsRepository = new IngredientsRepository();
 
 class MealsController {
     async create(request, response) {

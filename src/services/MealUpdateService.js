@@ -1,8 +1,9 @@
 const AppError = require('../utils/AppError');
 
 class MealUpdateService {
-    constructor(mealRepository) {
+    constructor(mealRepository, ingredientsRepository) {
         this.mealRepository = mealRepository;
+        this.ingredientsRepository = ingredientsRepository;
     }
 
     // async executePictureUpdate(picture) {
@@ -28,6 +29,30 @@ class MealUpdateService {
                 }
             }
 
+        }
+
+        const currentIngredients = await this.ingredientsRepository.findByMealId(id);
+
+        if (mealNewInfo.ingredients[0]) {
+
+            const currentIngredientsNames = currentIngredients.map(ingredient => ingredient.name) ?? [];
+
+            const ingredientsToCreate = mealNewInfo.ingredients.filter(requestIngredient => !currentIngredientsNames.includes(requestIngredient));
+
+            const ingredientsToRemove = currentIngredients.filter(currentIngredient => !mealNewInfo.ingredients.includes(currentIngredient.name));
+
+            if (ingredientsToCreate) {
+                ingredientsToCreate.map(async (ingredient) => {
+                    await this.ingredientsRepository.create(ingredient, id);
+                });
+
+            }
+
+            if (ingredientsToRemove) {
+                ingredientsToRemove.map(async (ingredient) => {
+                    await this.ingredientsRepository.delete(ingredient.id);
+                });
+            }
         }
 
         const updatedMeal = await this.mealRepository.updateText({ id, ...mealNewInfo });
