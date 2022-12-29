@@ -9,13 +9,13 @@ class MealCreateService {
         const { name, ingredients, price, description, picture, type } = data;
 
         if (!name || !ingredients || !price || !description || !type) {
-            throw new AppError('Preencha todos os campos.');
+            return ({ message: 'Preencha todos os campos.' });
         }
 
         const existingMeal = await this.mealRepository.findByName(name);
 
         if (existingMeal) {
-            throw new AppError('Já existe um prato cadastrado com esse nome. Para evitar confusão de pedidos, informe um nome diferente.');
+            return ({ message: 'Já existe um prato cadastrado com esse nome. Para evitar confusão de pedidos, informe um nome diferente.' });
         }
 
         let meal = this.mealRepository.create({ name, ingredients, price, description, type });

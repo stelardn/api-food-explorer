@@ -11,20 +11,24 @@ const MealDeleteService = require('../services/MealDeleteService');
 const mealDeleteService = new MealDeleteService(mealRepository);
 
 const FavoritesRepository = require('../repositories/FavoritesRepository');
+const AppError = require('../utils/AppError');
 const favoritesRepository = new FavoritesRepository;
 
 
 class MealsController {
     async create(request, response) {
-        const { name, ingredients, price, description, picture, type } = request.body;
+        const { name, ingredients, price, description, picture } = request.body;
 
-        if (!type) {
-            request.body.type = 'Pratos principais';
+
+        const type = request.body.type ?? 'Pratos Principais';
+
+        const result = await mealCreateService.execute({ name, ingredients, price, description, picture, type });
+
+        if (result.message) {
+            console.log(result);
+            throw new AppError(result.message);
         }
-
-        const meal = await mealCreateService.execute({ name, ingredients, price, description, picture, type });
-
-        return response.status(201).json({ meal });
+        return response.status(201).json({ result });
 
     }
 

@@ -26,6 +26,7 @@ class OrderItemsRepository {
                 'meals.id',
                 'meals.name',
                 'meals.price',
+                'meals.picture',
                 'order_items.quantity',
             ])
             .where({ order_id })

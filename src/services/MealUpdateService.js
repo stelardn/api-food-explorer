@@ -6,9 +6,6 @@ class MealUpdateService {
         this.ingredientsRepository = ingredientsRepository;
     }
 
-    // async executePictureUpdate(picture) {
-
-    // }
 
     async executeTextUpdate(mealNewInfo) {
         const { id } = mealNewInfo;
@@ -33,7 +30,7 @@ class MealUpdateService {
 
         const currentIngredients = await this.ingredientsRepository.findByMealId(id);
 
-        if (mealNewInfo.ingredients[0]) {
+        if (mealNewInfo.ingredients) {
 
             const currentIngredientsNames = currentIngredients.map(ingredient => ingredient.name) ?? [];
 

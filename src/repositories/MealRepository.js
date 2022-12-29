@@ -43,7 +43,7 @@ class MealRepository {
             .innerJoin('ingredients', 'meals.id', 'ingredients.meal_id')
             .whereLike('meals.name', `%${filter}%`)
             .orWhereLike('ingredients.name', `%${filter}%`)
-            .orderBy('meals.name')
+            .orderBy('meals.id')
             .groupBy('meals.id');
 
         return allMeals;

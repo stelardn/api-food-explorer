@@ -1,3 +1,6 @@
+const DiskStorage = require('../providers/DiskStorage');
+const diskStorage = new DiskStorage();
+
 const AppError = require('../utils/AppError');
 
 class MealDeleteService {
@@ -10,6 +13,11 @@ class MealDeleteService {
 
         if (!existingMeal) {
             throw new AppError('Prato não encontrado.');
+        }
+
+        DiskStorage
+        if (existingMeal.picture) {
+            await diskStorage.deleteFile(existingMeal.picture);
         }
 
         await this.mealRepository.delete(id);
