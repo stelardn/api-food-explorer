@@ -20,6 +20,18 @@ npm install
 npm run migrate
 ```
 
+### Populate database using seeds
+```
+npm run seed
+```
+
+## Deploy
+Server available at https://api-food-explorer.onrender.com/.
+
+Web application available at https://fooodexplorer.netlify.app/.
+
+Frontend project: https://github.com/stelardn/front-food-explorer.
+
 ## Routes
 ### Users
 #### Create
@@ -131,6 +143,3 @@ Once a session is created, the user has authorization to access to the following
 
 #### Show a list of all orders
 `@GET - /orders/`
-
-
-
